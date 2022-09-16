@@ -14,6 +14,7 @@ class App extends React.Component {
             icone: null,
             mensagemDeErro: null,
         }
+        console.log('construtor')
     }
 
     obterEstacao = (data, latitude) => {
@@ -63,8 +64,20 @@ class App extends React.Component {
         )
     }
 
- render(){
+    componentDidMount(){
+        console.log("componentDidMount")
+    }
 
+    componentDidUpdate(){
+        console.log("componentDidUpdate")
+    }
+
+    componentWillUnmount(){
+        console.log("ccomponentWillUnmount")
+    }
+
+ render(){
+     console.log("render")
     return (
         <div className='container mt-2 border p-5'>
             <div className="row justify-content-center">
@@ -92,6 +105,13 @@ class App extends React.Component {
                               onClick={this.obterLocalizacao} 
                               className="btn btn-outline-primary w-100 mt-2">
                                 Qual a Minha Estação?
+                          </button>
+
+                          <button className="btn btn-outline-danger w-100 mt-2"
+                          onClick={() => {
+                              ReactDom.unmountComponentAtNode(document.querySelector('#root'))
+                          }}>
+                          Perigo!!!
                           </button>
                       </div>
                     </div>
