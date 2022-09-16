@@ -41,7 +41,7 @@ class App extends React.Component {
         "Inverno" : "fa-snowman"
     }
 
-    obterLocalizacao(){
+    obterLocalizacao = () => {
         window.navigator.geolocation.getCurrentPosition(
             (position) => {
                 let data = new Date()
@@ -68,8 +68,7 @@ class App extends React.Component {
                       <div className="card-body">
                           <div className="d-flex align-items-center border rounded mb-2" style={{height: '6rem'}}>
                               <i className={`fas fa-5x ${this.state.icone}`}></i>
-                              <p className="w-75 ms-3 text-center fs-1"> {`${this.state.estacao}`} </p>
-
+                              <p className="w-75 ms-3 text-center fs-1"> {this.state.estacao} </p>
                           </div>
                           <div>
                               <p className="text-center">
@@ -81,6 +80,11 @@ class App extends React.Component {
                                   }
                               </p>
                           </div>
+                          <button
+                              onClick={this.obterLocalizacao} 
+                              className="btn btn-outline-primary w-100 mt-2">
+                                Qual a Minha Estação?
+                          </button>
                       </div>
                     </div>
                 </div>
