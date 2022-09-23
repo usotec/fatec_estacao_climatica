@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import ReactDom from 'react-dom'
 import React from 'react'
 import EstacaoClimatica from './EstacaoClimatica'
+import Loading from './Loading'
 
 class App extends React.Component {
 
@@ -19,7 +20,7 @@ class App extends React.Component {
     }
 
     state = {
-        atitude: null,
+        latitude: null,
         longitude: null,
         estacao: null,
         data: null,
@@ -92,14 +93,25 @@ class App extends React.Component {
         <div className='container mt-2 border p-5'>
             <div className="row justify-content-center">
                 <div className="col-md-8">
+                    {
+                    (!this.state.mensagemDeErro && !this.state.latitude)
+                    ?
+                    <Loading />
+                    :
+                    this.state.mensagemDeErro ?
+                    <p className="border rounded p-2 fs-1">
+                        É preciso dar permissão para acesso a Localização.
+                    </p>
+                    :
                      <EstacaoClimatica 
                         icone={this.state.icone}
                         estacao={this.state.estacao}
                         latitude={this.state.latitude}
                         longitude={this.state.longitude}
-                        data={this.state.data}
-                        mensagemDeErro={this.state.mensagemDeErro}
-                     />
+                        //data={this.state.data}
+                        //mensagemDeErro={this.state.mensagemDeErro}
+                        obterLocalizacao={this.obterLocalizacao}
+                     />}
                 </div>
             </div>
         </div>

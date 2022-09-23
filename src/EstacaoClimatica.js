@@ -2,6 +2,30 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
 export default class EstacaoClimatica extends Component {
+  
+  timer = null
+
+  state = {
+    data: null
+  }
+
+  componentDidMount(){
+    console.log("EC: componentDidMount")
+    this.time = setInterval(() => {
+      this.setState({data: new Date().toLocaleTimeString()})
+    }, 1000)
+  }
+
+  componentDidUpdate(){
+    console.log("EC: componentDidUpdate")
+  }
+
+  componentWillUnmount(){
+    console.log("EC: componentWillUnmount")
+    clearInterval(this.timer)
+  }
+
+
   render() {
     return (
         <div className="card">
@@ -14,17 +38,14 @@ export default class EstacaoClimatica extends Component {
                 <p className="text-center">
                     {
                         this.props.latitude?
-                          `Coordenadas: ${this.props.latitude}, ${this.props.longitude}. Data: ${this.props.data}.`
-                        :
-                        this.props.mensagemDeErro?
-                           `${this.props.mensagemDeErro}` 
+                          `Coordenadas: ${this.props.latitude}, ${this.props.longitude}. Data: ${this.state.data}.`
                         :
                           `Clique no botão para saber a sua estação climática.`
                     }
                 </p>
             </div>
             <button
-                onClick={this.obterLocalizacao} 
+                onClick={this.props.obterLocalizacao} 
                 className="btn btn-outline-primary w-100 mt-2">
                   Qual a Minha Estação?
             </button>
